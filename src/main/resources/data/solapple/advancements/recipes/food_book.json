@@ -1,0 +1,39 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards": {
+		"recipes": [
+			"solcarrot:food_book"
+		]
+	},
+	"criteria": {
+		"has_apple": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{ "item": "minecraft:apple" }
+				]
+			}
+		},
+		"has_book": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{ "item": "minecraft:book" }
+				]
+			}
+		},
+		"has_the_recipe": {
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": {
+				"recipe": "solcarrot:food_book"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"has_apple",
+			"has_book",
+			"has_the_recipe"
+		]
+	]
+}

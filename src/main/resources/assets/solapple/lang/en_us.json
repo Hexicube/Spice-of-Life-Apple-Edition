@@ -1,0 +1,72 @@
+{
+	"tooltip.solapple.hearty.not_eaten": "Not yet eaten! What does it taste like?",
+	"tooltip.solapple.hearty.eaten": "Eaten: Assisted in adding hearts",
+	"tooltip.solapple.cheap.eaten": "Eaten: No noticeable effect",
+	"tooltip.solapple.cheap": "This food is not nourishing enough to improve your health.",
+	"tooltip.solapple.disabled.blacklist": "This food is in the blacklist and thus cannot improve your health.",
+	"tooltip.solapple.disabled.whitelist": "This food is not in the whitelist and thus cannot improve your health.",
+	"tooltip.solapple.disabled.eaten": "Eaten: No noticeable effect",
+	
+	"command.solapple.foodlist.no_permissions": "You do not have the permissions necessary to apply this command to other players!",
+	
+	"command.solapple.foodlist.size.desc.foods_eaten.singular": "You've eaten one unique food!",
+	"command.solapple.foodlist.size.desc.foods_eaten.plural": "You've eaten %s unique foods!",
+	"command.solapple.foodlist.size.desc.milestone.max": "You sadly cannot gain any more health from trying new foods.",
+	"command.solapple.foodlist.size.desc.milestone.more": "You need %s more to increase your max health.",
+	
+	"command.solapple.foodlist.clear.success": "Food list reset!",
+	
+	"command.solapple.foodlist.sync.success": "Food list synchronized!",
+	
+	"message.solapple.chat_wrapper": "[SoL: Apple] %s",
+	"message.solapple.hearts.singular": "a heart",
+	"message.solapple.hearts.plural": "%s hearts",
+	"message.solapple.milestone_achieved": "What a unique flavor! You've gained %s!",
+	"message.solapple.finished.chat": "Your desire to seek unique foods is finally satisfied.",
+	"message.solapple.finished.hotbar": "You've gained %s. Your desire to seek unique foods is finally satisfied.",
+	
+	"item.solapple.food_book": "Food Book",
+	
+	"gui.solapple.food_book.stats": "Overview",
+	"gui.solapple.food_book.eaten_foods": "Already Tasted: %s",
+	"gui.solapple.food_book.uneaten_foods": "Not Yet Tried: %s",
+	"gui.solapple.food_book.config": "Configuration",
+	
+	"gui.solapple.food_book.fraction": "%1$s/%2$s",
+	
+	"gui.solapple.food_book.stats.foods_tasted": "Foods Tasted",
+	"gui.solapple.food_book.stats.hearts_gained": "Hearts Gained",
+	"gui.solapple.food_book.stats.tooltip.progress": "%s More Until Next Milestone",
+	"gui.solapple.food_book.stats.tooltip.progress.max": "Highest Milestone Reached!",
+	"gui.solapple.food_book.stats.tooltip.previous_milestone": "Last Milestone: %s",
+	"gui.solapple.food_book.stats.tooltip.next_milestone": "Next Milestone: %s",
+	"gui.solapple.food_book.stats.tooltip.total_foods": "%s Total Foods",
+	"gui.solapple.food_book.stats.tooltip.foods_tasted": "Foods Tasted: %s",
+	"gui.solapple.food_book.stats.tooltip.hearts_per_milestone.singular": "1 Heart per Milestone",
+	"gui.solapple.food_book.stats.tooltip.hearts_per_milestone.plural": "%s Hearts per Milestone",
+	
+	"gui.solapple.food_book.config.minimum_food_value": "Minimum Food Value",
+	"gui.solapple.food_book.config.tooltip.minimum_food_value": "The minimum hunger value foods need to provide in order to count towards milestones.",
+	"gui.solapple.food_book.config.hearty_fraction": "Nourishing Foods",
+	"gui.solapple.food_book.config.tooltip.hearty_fraction": "Out of %1$s foods, %2$s are nourishing enough to improve your health.",
+	"gui.solapple.food_book.config.eaten_cheap_foods": "Boring Foods Tasted",
+	"gui.solapple.food_book.config.tooltip.eaten_cheap_foods": "Out of the %1$s foods that aren't nourishing enough to improve your health, you've eaten %2$s.",
+	"gui.solapple.food_book.config.blacklist": "Blacklisted Foods",
+	"gui.solapple.food_book.config.whitelist": "Whitelisted Foods",
+	"gui.solapple.food_book.config.tooltip.blacklist": "How many foods have been disabled by the blacklist.",
+	"gui.solapple.food_book.config.tooltip.whitelist": "How many foods the whitelist allows.",
+	
+	"config.solapple.base_hearts": "Base Hearts",
+	"config.solapple.hearts_per_milestone": "Hearts per Milestone",
+	"config.solapple.milestones": "Milestones",
+	"config.solapple.is_food_tooltip_enabled": "Enable Food Tooltip",
+	"config.solapple.should_show_progress_above_hotbar": "Show Progress Above Hotbar",
+	"config.solapple.should_show_uneaten_foods": "Show Uneaten Foods",
+	"config.solapple.should_play_milestone_sounds": "Enable Milestone Sounds",
+	"config.solapple.should_spawn_intermediate_particles": "Enable Intermediate Particles",
+	"config.solapple.should_spawn_milestone_particles": "Enable Milestone Particles",
+	"config.solapple.food_blacklist": "Blacklist",
+	"config.solapple.food_whitelist": "Whitelist (disables blacklist)",
+	"config.solapple.minimum_food_value": "Minimum Food Value",
+	"config.solapple.reset_on_death": "Reset on Death"
+}
