@@ -31,7 +31,6 @@ public final class TooltipHandler {
 		FoodList foodList = FoodList.get(player);
 		boolean hasBeenEaten = foodList.hasEaten(food);
 		boolean isAllowed = SOLAppleConfig.isAllowed(food);
-		boolean isHearty = SOLAppleConfig.isHearty(food);
 		
 		var tooltip = event.getToolTip();
 		if (!isAllowed) {
@@ -39,17 +38,12 @@ public final class TooltipHandler {
 				tooltip.add(localizedTooltip("disabled.eaten", ChatFormatting.DARK_RED));
 			}
 			tooltip.add(localizedTooltip("disabled.blacklist", ChatFormatting.DARK_GRAY));
-		} else if (isHearty) {
+		} else {
 			if (hasBeenEaten) {
 				tooltip.add(localizedTooltip("hearty.eaten", ChatFormatting.DARK_GREEN));
 			} else {
 				tooltip.add(localizedTooltip("hearty.not_eaten", ChatFormatting.DARK_AQUA));
 			}
-		} else {
-			if (hasBeenEaten) {
-				tooltip.add(localizedTooltip("cheap.eaten", ChatFormatting.DARK_RED));
-			}
-			tooltip.add(localizedTooltip("cheap", ChatFormatting.DARK_GRAY));
 		}
 	}
 	

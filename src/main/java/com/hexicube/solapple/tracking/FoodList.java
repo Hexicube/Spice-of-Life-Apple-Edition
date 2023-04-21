@@ -71,7 +71,7 @@ public final class FoodList implements FoodCapability {
 	
 	/** @return true if the food was not previously known, i.e. if a new food has been tried */
 	public boolean addFood(Item food) {
-		boolean wasAdded = foods.add(new FoodInstance(food)) && SOLAppleConfig.shouldCount(food);
+		boolean wasAdded = foods.add(new FoodInstance(food)) && SOLAppleConfig.isAllowed(food);
 		invalidateProgressInfo();
 		return wasAdded;
 	}

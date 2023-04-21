@@ -25,7 +25,7 @@ final class FoodData {
 		this.foodList = foodList;
 		this.progressInfo = foodList.getProgressInfo();
 		this.validFoods = FoodItems.getAllFoods().stream()
-			.filter(SOLAppleConfig::isHearty)
+			.filter(SOLAppleConfig::isAllowed)
 			.collect(Collectors.toList());
 		this.eatenFoods = new ArrayList<>();
 		this.uneatenFoods = new ArrayList<>();

@@ -9,7 +9,7 @@ public final class ProgressInfo {
 	
 	ProgressInfo(FoodList foodList) {
 		foodsEaten = (int) foodList.getEatenFoods().stream()
-			.filter(food -> SOLAppleConfig.shouldCount(food.item))
+			.filter(food -> SOLAppleConfig.isAllowed(food.item))
 			.count();
 	}
 	

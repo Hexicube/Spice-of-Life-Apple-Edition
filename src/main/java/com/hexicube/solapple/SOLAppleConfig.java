@@ -248,16 +248,6 @@ public final class SOLAppleConfig {
 		}*/
 	}
 	
-	public static boolean shouldCount(Item food) {
-		return isHearty(food) && isAllowed(food);
-	}
-	
-	public static boolean isHearty(Item food) {
-		var foodInfo = food.getFoodProperties();
-		if (foodInfo == null) return false;
-		return foodInfo.getNutrition() >= SERVER.minimumFoodValue.get();
-	}
-	
 	private static boolean matchesAnyPattern(String query, Collection<? extends String> patterns) {
 		for (String glob : patterns) {
 			StringBuilder pattern = new StringBuilder(glob.length());
