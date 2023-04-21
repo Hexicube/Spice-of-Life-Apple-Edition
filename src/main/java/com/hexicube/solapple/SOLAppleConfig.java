@@ -75,14 +75,6 @@ public final class SOLAppleConfig {
 		return new ArrayList<>(SERVER.milestones.get());
 	}
 	
-	public static List<String> getBlacklist() {
-		return new ArrayList<>(SERVER.blacklist.get());
-	}
-	
-	public static List<String> getWhitelist() {
-		return new ArrayList<>(SERVER.whitelist.get());
-	}
-	
 	public static int getMinimumFoodValue() {
 		return SERVER.minimumFoodValue.get();
 	}
@@ -99,9 +91,7 @@ public final class SOLAppleConfig {
 		public final IntValue baseHearts;
 		public final IntValue heartsPerMilestone;
 		public final ConfigValue<List<? extends Integer>> milestones;
-		
-		public final ConfigValue<List<? extends String>> blacklist;
-		public final ConfigValue<List<? extends String>> whitelist;
+
 		public final IntValue minimumFoodValue;
 		
 		public final BooleanValue shouldResetOnDeath;
@@ -127,22 +117,22 @@ public final class SOLAppleConfig {
 			
 			builder.pop();
 			builder.push("filtering");
-			
-			blacklist = builder
+
+			/*blacklist = builder
 				.translation(localizationPath("blacklist"))
 				.comment("Foods in this list won't affect the player's health nor show up in the food book.")
 				.defineList("blacklist", Lists.newArrayList(), e -> e instanceof String);
-			
+
 			whitelist = builder
 				.translation(localizationPath("whitelist"))
 				.comment("When this list contains anything, the blacklist is ignored and instead only foods from here count.")
-				.defineList("whitelist", Lists.newArrayList(), e -> e instanceof String);
-			
+				.defineList("whitelist", Lists.newArrayList(), e -> e instanceof String);*/
+
 			minimumFoodValue = builder
 				.translation(localizationPath("minimum_food_value"))
 				.comment("The minimum hunger value foods need to provide in order to count for milestones, in half drumsticks.")
 				.defineInRange("minimumFoodValue", 1, 0, 1000);
-			
+
 			builder.pop();
 			builder.push("miscellaneous");
 			
@@ -247,17 +237,15 @@ public final class SOLAppleConfig {
 		return milestone(getMilestoneCount() - 1);
 	}
 	
-	public static boolean hasWhitelist() {
-		return !SERVER.whitelist.get().isEmpty();
-	}
-	
 	public static boolean isAllowed(Item food) {
-		String id = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(food)).toString();
+		// TODO: check if the item is in any food group
+		return true;
+		/*String id = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(food)).toString();
 		if (hasWhitelist()) {
 			return matchesAnyPattern(id, SERVER.whitelist.get());
 		} else {
 			return !matchesAnyPattern(id, SERVER.blacklist.get());
-		}
+		}*/
 	}
 	
 	public static boolean shouldCount(Item food) {

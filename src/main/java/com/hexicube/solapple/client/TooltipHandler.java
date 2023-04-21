@@ -38,8 +38,7 @@ public final class TooltipHandler {
 			if (hasBeenEaten) {
 				tooltip.add(localizedTooltip("disabled.eaten", ChatFormatting.DARK_RED));
 			}
-			String key = SOLAppleConfig.hasWhitelist() ? "whitelist" : "blacklist";
-			tooltip.add(localizedTooltip("disabled." + key, ChatFormatting.DARK_GRAY));
+			tooltip.add(localizedTooltip("disabled.blacklist", ChatFormatting.DARK_GRAY));
 		} else if (isHearty) {
 			if (hasBeenEaten) {
 				tooltip.add(localizedTooltip("hearty.eaten", ChatFormatting.DARK_GREEN));

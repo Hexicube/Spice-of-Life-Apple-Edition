@@ -51,22 +51,14 @@ final class ConfigInfoPage extends Page {
 		mainStack.addChild(makeSeparatorLine());
 		
 		{
-			boolean hasWhitelist = SOLAppleConfig.hasWhitelist();
-			String listKey = hasWhitelist ? "whitelist" : "blacklist";
-			
-			ImageData listIcon = hasWhitelist ? FoodBookScreen.whitelistImage : FoodBookScreen.blacklistImage;
-			
 			int allFoods = FoodItems.getAllFoodsIgnoringBlacklist().size();
 			int allowedFoods = FoodItems.getAllFoods().size();
-			String fraction = hasWhitelist
-				? fraction(allowedFoods, allFoods)
-				: fraction(allFoods - allowedFoods, allFoods);
 			UIElement listStat = statWithIcon(
-				listIcon,
-				fraction,
-				localized("gui", "food_book.config." + listKey)
+				FoodBookScreen.blacklistImage,
+				fraction(allFoods - allowedFoods, allFoods),
+				localized("gui", "food_book.config.blacklist")
 			);
-			listStat.tooltip = localized("gui", "food_book.config.tooltip." + listKey);
+			listStat.tooltip = localized("gui", "food_book.config.tooltip.blacklist");
 			mainStack.addChild(listStat);
 		}
 		
