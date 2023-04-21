@@ -75,10 +75,6 @@ public final class SOLAppleConfig {
 		return new ArrayList<>(SERVER.milestones.get());
 	}
 	
-	public static int getMinimumFoodValue() {
-		return SERVER.minimumFoodValue.get();
-	}
-	
 	public static boolean shouldResetOnDeath() {
 		return SERVER.shouldResetOnDeath.get();
 	}
@@ -91,8 +87,6 @@ public final class SOLAppleConfig {
 		public final IntValue baseHearts;
 		public final IntValue heartsPerMilestone;
 		public final ConfigValue<List<? extends Integer>> milestones;
-
-		public final IntValue minimumFoodValue;
 		
 		public final BooleanValue shouldResetOnDeath;
 		public final BooleanValue limitProgressionToSurvival;
@@ -115,10 +109,10 @@ public final class SOLAppleConfig {
 				.comment("A list of numbers of unique foods you need to eat to unlock each milestone, in ascending order. Naturally, adding more milestones lets you earn more hearts.")
 				.defineList("milestones", Lists.newArrayList(5, 10, 15, 20, 25), e -> e instanceof Integer);
 			
-			builder.pop();
+			/*builder.pop();
 			builder.push("filtering");
 
-			/*blacklist = builder
+			blacklist = builder
 				.translation(localizationPath("blacklist"))
 				.comment("Foods in this list won't affect the player's health nor show up in the food book.")
 				.defineList("blacklist", Lists.newArrayList(), e -> e instanceof String);
@@ -127,11 +121,6 @@ public final class SOLAppleConfig {
 				.translation(localizationPath("whitelist"))
 				.comment("When this list contains anything, the blacklist is ignored and instead only foods from here count.")
 				.defineList("whitelist", Lists.newArrayList(), e -> e instanceof String);*/
-
-			minimumFoodValue = builder
-				.translation(localizationPath("minimum_food_value"))
-				.comment("The minimum hunger value foods need to provide in order to count for milestones, in half drumsticks.")
-				.defineInRange("minimumFoodValue", 1, 0, 1000);
 
 			builder.pop();
 			builder.push("miscellaneous");
