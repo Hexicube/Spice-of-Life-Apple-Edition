@@ -67,6 +67,8 @@ public final class SOLAppleConfig {
 		return SERVER.baseHearts.get();
 	}
 
+	public static List<Server.FoodGroupConfig> getFoodGroups() { return new ArrayList<>(SERVER.foodGroupList); }
+
 	public static int getHeartsPerMilestone() {
 		return SERVER.heartsPerMilestone.get();
 	}
@@ -101,22 +103,22 @@ public final class SOLAppleConfig {
 
 			static {
 				DEFAULT_NAMES.put("harvest", "Harvestables");
-				DEFAULT_FOOD.put("harvest", List.of("minecraft:apple", "minecraft:carrot", "minecraft:potato", "minecraft:beetroot"));
+				DEFAULT_FOOD.put("harvest", List.of("minecraft.apple", "minecraft.carrot", "minecraft.potato", "minecraft.beetroot"));
 
 				DEFAULT_NAMES.put("fish", "Fish");
-				DEFAULT_FOOD.put("fish", List.of("minecraft:cooked_cod", "minecraft:cooked_salmon", "minecraft:tropical_fish"));
+				DEFAULT_FOOD.put("fish", List.of("minecraft.cooked_cod", "minecraft.cooked_salmon", "minecraft.tropical_fish"));
 
 				DEFAULT_NAMES.put("produce", "Produce");
-				DEFAULT_FOOD.put("produce", List.of("minecraft:bread", "minecraft:baked_potato", "minecraft:pumpkin_pie", "minecraft:beetroot_soup", "minecraft:mushroom_stew", "minecraft:rabbit_stew"));
+				DEFAULT_FOOD.put("produce", List.of("minecraft.bread", "minecraft.baked_potato", "minecraft.pumpkin_pie", "minecraft.beetroot_soup", "minecraft.mushroom_stew", "minecraft.rabbit_stew"));
 
 				DEFAULT_NAMES.put("meat", "Meat");
-				DEFAULT_FOOD.put("meat", List.of("minecraft:cooked_beef", "minecraft:cooked_porkchop", "minecraft:cooked_chicken", "minecraft:cooked_mutton", "minecraft:cooked_rabbit"));
+				DEFAULT_FOOD.put("meat", List.of("minecraft.cooked_beef", "minecraft.cooked_porkchop", "minecraft.cooked_chicken", "minecraft.cooked_mutton", "minecraft.cooked_rabbit"));
 
 				DEFAULT_NAMES.put("treat", "Treats");
-				DEFAULT_FOOD.put("treat", List.of("minecraft:cookie", "minecraft:melon_slice", "minecraft:honey_bottle", "minecraft:sweet_berries", "minecraft:glow_berries"));
+				DEFAULT_FOOD.put("treat", List.of("minecraft.cookie", "minecraft.melon_slice", "minecraft.honey_bottle", "minecraft.sweet_berries", "minecraft.glow_berries"));
 
 				DEFAULT_NAMES.put("gold", "Golden");
-				DEFAULT_FOOD.put("gold", List.of("minecraft:golden_apple", "minecraft:golden_carrot", "minecraft:enchanted_golden_apple"));
+				DEFAULT_FOOD.put("gold", List.of("minecraft.golden_apple", "minecraft.golden_carrot", "minecraft.enchanted_golden_apple"));
 			}
 
 			public final String groupID;
@@ -124,7 +126,6 @@ public final class SOLAppleConfig {
 			public FoodGroupConfig(Builder builder, String group) {
 				groupID = group;
 
-				builder.pop();
 				builder.push("group." + group);
 
 				name = builder
@@ -141,6 +142,8 @@ public final class SOLAppleConfig {
 						.translation("group_hearts")
 						.comment("How many hearts this group grants.")
 						.defineInRange("hearts", 2, 0, 1000);
+
+				builder.pop();
 			}
 
 			public final ConfigValue<String> name;
@@ -171,10 +174,11 @@ public final class SOLAppleConfig {
 					.comment("A list of numbers of unique foods you need to eat to unlock each milestone, in ascending order. Naturally, adding more milestones lets you earn more hearts.")
 					.defineList("milestones", Lists.newArrayList(5, 10, 15, 20, 25), e -> e instanceof Integer);
 
+			builder.pop();
+
 			foodGroupList = new ArrayList<>();
 			foodGroups.get().forEach(groupName -> foodGroupList.add(new FoodGroupConfig(builder, groupName)));
 
-			builder.pop();
 			builder.push("miscellaneous");
 
 			shouldResetOnDeath = builder
@@ -279,10 +283,9 @@ public final class SOLAppleConfig {
 	}
 
 	public static boolean isAllowed(Item food) {
-		// TODO: check if the item is in any food group
-		return true;
-        /*String id = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(food)).toString();
-		if (hasWhitelist()) {
+        String id = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(food)).toString();
+		return SERVER.foodGroupList.stream().anyMatch(group -> group.foods.get().contains(id));
+		/*if (hasWhitelist()) {
 			return matchesAnyPattern(id, SERVER.whitelist.get());
 		} else {
 			return !matchesAnyPattern(id, SERVER.blacklist.get());
