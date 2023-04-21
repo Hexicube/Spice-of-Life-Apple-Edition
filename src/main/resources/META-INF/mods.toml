@@ -2,7 +2,7 @@ modLoader = "javafml"
 loaderVersion = "[36,)"
 
 issueTrackerURL = "https://github.com/Hexicube/Spice-of-Life-Carrot-Edition/issues"
-displayURL = "https://curseforge.com/minecraft/mc-mods/spice-of-life-carrot-edition"
+displayURL = ""
 logoFile = "logo 160.png"
 license = "LGPL-2.1"
 credits = "Lewis_McReu for some coding assistance, Vik for the great new art :)"

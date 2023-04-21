@@ -44,7 +44,7 @@ minecraft {
 			property 'forge.logging.console.level', 'debug'
 			
 			mods {
-				solcarrot {
+				solapple {
 					source sourceSets.main
 				}
 			}
@@ -60,7 +60,7 @@ minecraft {
 			property 'forge.logging.console.level', 'debug'
 			
 			mods {
-				solcarrot {
+				solapple {
 					source sourceSets.main
 				}
 			}
@@ -74,10 +74,10 @@ minecraft {
 			
 			property 'forge.logging.console.level', 'debug'
 			
-			args '--mod', 'solcarrot', '--all', '--output', file('src/generated/resources/')
+			args '--mod', 'solapple', '--all', '--output', file('src/generated/resources/')
 			
 			mods {
-				solcarrot {
+				solapple {
 					source sourceSets.main
 				}
 			}
@@ -126,12 +126,12 @@ jar {
 	
 	manifest {
 		attributes([
-			"Specification-Title": "solcarrot",
-			"Specification-Vendor": "solcarrotsareus",
+			"Specification-Title": "solapple",
+			"Specification-Vendor": "solapplesareus",
 			"Specification-Version": "1", // We are version 1 of ourselves
 			"Implementation-Title": project.name,
 			"Implementation-Version": "${full_mod_version}",
-			"Implementation-Vendor" :"solcarrotsareus",
+			"Implementation-Vendor" :"solapplesareus",
 			"Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
 		])
 	}

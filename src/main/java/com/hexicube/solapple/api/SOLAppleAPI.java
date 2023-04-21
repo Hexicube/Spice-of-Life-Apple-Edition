@@ -6,7 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.*;
 
 /**
- Provides a stable API for interfacing with Spice of Life: Carrot Edition.
+ Provides a stable API for interfacing with Spice of Life: Apple Edition.
  */
 public final class SOLAppleAPI {
 	public static Capability<FoodCapability> foodCapability = CapabilityManager.get(new CapabilityToken<>() { });
