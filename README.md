@@ -14,8 +14,12 @@ This mod comes with a custom config to set the player's starting hearts (which c
 
 The default configuration will have 10 base hearts and the following groups all offering 2 hearts:
 
-- Harvestables: Carrot, Beetroot, Apple
-- Produce: Beetroot Stew, Bread
+- **Harvestables**: Carrot, Beetroot, Apple, Potato
+- **Fish**: Cooked Cod, Cooked Salmon, Tropical Fish
+- **Produce**: Bread, Baked Potato, Pumpkin Pie, Beetroot Soup, Rabbit Stew, Mushroom Stew
+- **Meat**: Cooked Porkchop, Cooked Mutton, Cooked Chicken, Steak, Cooked Rabbit
+- **Treats**: Sweet Berries, Honey Bottle, Glow Berries, Melon Slice, Cookie
+- **Golden**: Golden Apple, Golden Carrot, Enchanted Golden Apple
 
 In order to track your progress, SoL: Apple offers a handy book called the Food Book, crafted simply by combining a book and an apple in any shape. This book offers a visualization of your overall progress, as well as all the food groups and what's been eaten from them.
 
