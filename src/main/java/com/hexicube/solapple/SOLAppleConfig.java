@@ -1,5 +1,6 @@
 package com.hexicube.solapple;
 
+import com.google.gson.*;
 import com.hexicube.solapple.tracking.CapabilityHandler;
 import com.hexicube.solapple.tracking.FoodList;
 import com.google.common.collect.Lists;
@@ -18,6 +19,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
@@ -56,6 +58,7 @@ public final class SOLAppleConfig {
 		MinecraftServer currentServer = ServerLifecycleHooks.getCurrentServer();
 		if (currentServer == null) return;
 
+		groupCache = null;
 		var players = currentServer.getPlayerList();
 		for (var player : players.getPlayers()) {
 			FoodList.get(player).invalidateProgressInfo();
@@ -67,7 +70,11 @@ public final class SOLAppleConfig {
 		return SERVER.baseHearts.get();
 	}
 
-	public static List<Server.FoodGroupConfig> getFoodGroups() { return new ArrayList<>(SERVER.foodGroupList); }
+	private static List<Server.FoodGroupConfig> groupCache = null;
+	public static List<Server.FoodGroupConfig> getFoodGroups() {
+		if (groupCache == null) groupCache = SERVER.foodGroups.get().stream().map(Server.FoodGroupConfig::decode).toList();
+		return groupCache;
+	}
 
 	public static int getHeartsPerMilestone() {
 		return SERVER.heartsPerMilestone.get();
@@ -89,7 +96,6 @@ public final class SOLAppleConfig {
 		public final IntValue baseHearts;
 
 		public final ConfigValue<List<? extends String>> foodGroups;
-		public final ArrayList<FoodGroupConfig> foodGroupList;
 
 		public final IntValue heartsPerMilestone;
 		public final ConfigValue<List<? extends Integer>> milestones;
@@ -98,57 +104,40 @@ public final class SOLAppleConfig {
 		public final BooleanValue limitProgressionToSurvival;
 
 		public static class FoodGroupConfig {
-			private static final HashMap<String, String> DEFAULT_NAMES = new HashMap<>();
-			private static final HashMap<String, List<String>> DEFAULT_FOOD = new HashMap<>();
-
-			static {
-				DEFAULT_NAMES.put("harvest", "Harvestables");
-				DEFAULT_FOOD.put("harvest", List.of("minecraft.apple", "minecraft.carrot", "minecraft.potato", "minecraft.beetroot"));
-
-				DEFAULT_NAMES.put("fish", "Fish");
-				DEFAULT_FOOD.put("fish", List.of("minecraft.cooked_cod", "minecraft.cooked_salmon", "minecraft.tropical_fish"));
-
-				DEFAULT_NAMES.put("produce", "Produce");
-				DEFAULT_FOOD.put("produce", List.of("minecraft.bread", "minecraft.baked_potato", "minecraft.pumpkin_pie", "minecraft.beetroot_soup", "minecraft.mushroom_stew", "minecraft.rabbit_stew"));
-
-				DEFAULT_NAMES.put("meat", "Meat");
-				DEFAULT_FOOD.put("meat", List.of("minecraft.cooked_beef", "minecraft.cooked_porkchop", "minecraft.cooked_chicken", "minecraft.cooked_mutton", "minecraft.cooked_rabbit"));
-
-				DEFAULT_NAMES.put("treat", "Treats");
-				DEFAULT_FOOD.put("treat", List.of("minecraft.cookie", "minecraft.melon_slice", "minecraft.honey_bottle", "minecraft.sweet_berries", "minecraft.glow_berries"));
-
-				DEFAULT_NAMES.put("gold", "Golden");
-				DEFAULT_FOOD.put("gold", List.of("minecraft.golden_apple", "minecraft.golden_carrot", "minecraft.enchanted_golden_apple"));
+			public String encode() {
+				JsonObject obj = new JsonObject();
+				obj.addProperty("name", name);
+				obj.addProperty("hearts", hearts);
+				JsonArray list = new JsonArray();
+				for (String food : foods) list.add(food);
+				obj.add("foodList", list);
+				return obj.toString();
+			}
+			public static FoodGroupConfig decode(String data) {
+				JsonObject obj = JsonParser.parseString(data).getAsJsonObject();
+				JsonArray foodList = obj.getAsJsonArray("foodList");
+				ArrayList<String> list = new ArrayList<>();
+				for (int a = 0; a < foodList.size(); a++) list.add(foodList.get(a).getAsString());
+				return new FoodGroupConfig(obj.get("name").getAsString(), list, obj.get("hearts").getAsInt());
 			}
 
-			public final String groupID;
+			protected static final List<String> DEFAULT_GROUPS = List.of(
+				new FoodGroupConfig("Harvestables", List.of("minecraft:apple", "minecraft:carrot", "minecraft:potato", "minecraft:beetroot"), 2).encode(),
+				new FoodGroupConfig("Fish", List.of("minecraft:cooked_cod", "minecraft:cooked_salmon", "minecraft:tropical_fish"), 2).encode(),
+				new FoodGroupConfig("Produce", List.of("minecraft:bread", "minecraft:baked_potato", "minecraft:pumpkin_pie", "minecraft:beetroot_soup", "minecraft:mushroom_stew", "minecraft:rabbit_stew"), 2).encode(),
+				new FoodGroupConfig("Meat", List.of("minecraft:cooked_beef", "minecraft:cooked_porkchop", "minecraft:cooked_chicken", "minecraft:cooked_mutton", "minecraft:cooked_rabbit"), 2).encode(),
+				new FoodGroupConfig("Treats", List.of("minecraft:cookie", "minecraft:melon_slice", "minecraft:honey_bottle", "minecraft:sweet_berries", "minecraft:glow_berries"), 2).encode(),
+				new FoodGroupConfig("Golden", List.of("minecraft:golden_apple", "minecraft:golden_carrot", "minecraft:enchanted_golden_apple"), 2).encode()
+			);
 
-			public FoodGroupConfig(Builder builder, String group) {
-				groupID = group;
-
-				builder.push("group." + group);
-
-				name = builder
-						.translation(localizationPath("group_name"))
-						.comment("The displayed name of the group.")
-						.define("name", DEFAULT_NAMES.getOrDefault(group, group));
-
-				foods = builder
-						.translation(localizationPath("group_food_list"))
-						.comment("The list of food items for this group.")
-						.defineList("foodList", DEFAULT_FOOD.getOrDefault(group, Lists.newArrayList()), e -> e instanceof String);
-
-				hearts = builder
-						.translation(localizationPath("group_hearts"))
-						.comment("How many hearts this group grants.")
-						.defineInRange("hearts", 2, 0, 1000);
-
-				builder.pop();
+			public FoodGroupConfig(String name, List<String> foods, int hearts) {
+				this.name = name;
+				this.foods = foods;
+				this.hearts = hearts;
 			}
-
-			public final ConfigValue<String> name;
-			public final ConfigValue<List<? extends String>> foods;
-			public final IntValue hearts;
+			public final String name;
+			public final List<String> foods;
+			public final int hearts;
 		}
 
 		Server(Builder builder) {
@@ -161,8 +150,8 @@ public final class SOLAppleConfig {
 
 			foodGroups = builder
 					.translation(localizationPath("food_groups"))
-					.comment("Names of the food groups below.")
-					.defineList("foodGroups", Lists.newArrayList("harvest", "fish", "produce", "meat", "treat", "gold"), e -> e instanceof String);
+					.comment("Collection of food groups.")
+					.defineList("foodGroups", FoodGroupConfig.DEFAULT_GROUPS, e -> e instanceof String);
 
 			heartsPerMilestone = builder
 					.translation(localizationPath("hearts_per_milestone"))
@@ -175,10 +164,6 @@ public final class SOLAppleConfig {
 					.defineList("milestones", Lists.newArrayList(5, 10, 15, 20, 25), e -> e instanceof Integer);
 
 			builder.pop();
-
-			foodGroupList = new ArrayList<>();
-			foodGroups.get().forEach(groupName -> foodGroupList.add(new FoodGroupConfig(builder, groupName)));
-
 			builder.push("miscellaneous");
 
 			shouldResetOnDeath = builder
@@ -284,12 +269,22 @@ public final class SOLAppleConfig {
 
 	public static boolean isAllowed(Item food) {
         String id = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(food)).toString();
-		return SERVER.foodGroupList.stream().anyMatch(group -> group.foods.get().contains(id));
+		//System.out.println("[SoL:Apple] Testing food ID: " + id);
+		return getFoodGroups().stream().anyMatch(group -> group.foods.contains(id));
 		/*if (hasWhitelist()) {
 			return matchesAnyPattern(id, SERVER.whitelist.get());
 		} else {
 			return !matchesAnyPattern(id, SERVER.blacklist.get());
 		}*/
+	}
+
+	// more efficient filtering for blacklist
+	public static Stream<Item> filterAllowed(Stream<Item> foodList) {
+		List<String> allValid = getFoodGroups().stream().map(it -> it.foods).flatMap(List::stream).distinct().toList();
+		return foodList.filter(food -> {
+			String id = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(food)).toString();
+			return allValid.contains(id);
+		});
 	}
 
 	private static boolean matchesAnyPattern(String query, Collection<? extends String> patterns) {

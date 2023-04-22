@@ -53,8 +53,6 @@ public final class FoodItems {
 	}
 	
 	private static void applyBlacklist() {
-		foods = foodsBeforeBlacklist.stream()
-			.filter(SOLAppleConfig::isAllowed)
-			.collect(Collectors.toList());
+		foods = SOLAppleConfig.filterAllowed(foodsBeforeBlacklist.stream()).toList();
 	}
 }
