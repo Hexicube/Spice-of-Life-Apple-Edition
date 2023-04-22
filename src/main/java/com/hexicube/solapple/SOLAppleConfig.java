@@ -76,14 +76,6 @@ public final class SOLAppleConfig {
 		return groupCache;
 	}
 
-	public static int getHeartsPerMilestone() {
-		return SERVER.heartsPerMilestone.get();
-	}
-
-	public static List<Integer> getMilestones() {
-		return new ArrayList<>(SERVER.milestones.get());
-	}
-
 	public static boolean shouldResetOnDeath() {
 		return SERVER.shouldResetOnDeath.get();
 	}
@@ -96,9 +88,6 @@ public final class SOLAppleConfig {
 		public final IntValue baseHearts;
 
 		public final ConfigValue<List<? extends String>> foodGroups;
-
-		public final IntValue heartsPerMilestone;
-		public final ConfigValue<List<? extends Integer>> milestones;
 
 		public final BooleanValue shouldResetOnDeath;
 		public final BooleanValue limitProgressionToSurvival;
@@ -145,6 +134,11 @@ public final class SOLAppleConfig {
 					return foods.contains(id);
 				}).toList();
 			}
+
+			public boolean isComplete(List<Item> list) {
+				List<Item> relevant = filterList(list);
+				return relevant.size() >= foods.size();
+			}
 		}
 
 		Server(Builder builder) {
@@ -159,16 +153,6 @@ public final class SOLAppleConfig {
 					.translation(localizationPath("food_groups"))
 					.comment("Collection of food groups.")
 					.defineList("foodGroups", FoodGroupConfig.DEFAULT_GROUPS, e -> e instanceof String);
-
-			heartsPerMilestone = builder
-					.translation(localizationPath("hearts_per_milestone"))
-					.comment("Number of hearts you gain for reaching a new milestone.")
-					.defineInRange("heartsPerMilestone", 2, 0, 1000);
-
-			milestones = builder
-					.translation(localizationPath("milestones"))
-					.comment("A list of numbers of unique foods you need to eat to unlock each milestone, in ascending order. Naturally, adding more milestones lets you earn more hearts.")
-					.defineList("milestones", Lists.newArrayList(5, 10, 15, 20, 25), e -> e instanceof Integer);
 
 			builder.pop();
 			builder.push("miscellaneous");
@@ -225,7 +209,7 @@ public final class SOLAppleConfig {
 
 			shouldPlayMilestoneSounds = builder
 					.translation(localizationPath("should_play_milestone_sounds"))
-					.comment("If true, reaching a new milestone plays a ding sound.")
+					.comment("If true, completing a group plays a ding sound.")
 					.define("shouldPlayMilestoneSounds", true);
 
 			shouldSpawnIntermediateParticles = builder
@@ -235,7 +219,7 @@ public final class SOLAppleConfig {
 
 			shouldSpawnMilestoneParticles = builder
 					.translation(localizationPath("should_spawn_milestone_particles"))
-					.comment("If true, reaching a new milestone spawns particles.")
+					.comment("If true, completing a group spawns particles.")
 					.define("shouldSpawnMilestoneParticles", true);
 
 			builder.pop();
@@ -248,7 +232,7 @@ public final class SOLAppleConfig {
 
 			shouldShowProgressAboveHotbar = builder
 					.translation(localizationPath("should_show_progress_above_hotbar"))
-					.comment("Whether the messages notifying you of reaching new milestones should be displayed above the hotbar or in chat.")
+					.comment("Whether the messages notifying you of completing groups should be displayed above the hotbar or in chat.")
 					.define("shouldShowProgressAboveHotbar", true);
 
 			shouldShowUneatenFoods = builder
@@ -258,20 +242,6 @@ public final class SOLAppleConfig {
 
 			builder.pop();
 		}
-	}
-
-	// TODO: investigate performance of all these get() calls
-
-	public static int milestone(int i) {
-		return SERVER.milestones.get().get(i);
-	}
-
-	public static int getMilestoneCount() {
-		return SERVER.milestones.get().size();
-	}
-
-	public static int highestMilestone() {
-		return milestone(getMilestoneCount() - 1);
 	}
 
 	public static boolean isAllowed(Item food) {

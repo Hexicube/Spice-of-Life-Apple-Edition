@@ -16,9 +16,9 @@ final class StatListPage extends Page {
 		ProgressInfo progressInfo = foodData.progressInfo;
 		String foodsTasted;
 		if (SOLAppleConfig.shouldShowUneatenFoods()) {
-			foodsTasted = fraction(progressInfo.foodsEaten, foodData.validFoods.size());
+			foodsTasted = fraction(progressInfo.foodsEaten.size(), foodData.validFoods.size());
 		} else {
-			foodsTasted = String.valueOf(progressInfo.foodsEaten);
+			foodsTasted = String.valueOf(progressInfo.foodsEaten.size());
 		}
 		
 		mainStack.addChild(statWithIcon(

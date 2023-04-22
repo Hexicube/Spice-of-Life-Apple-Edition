@@ -1,35 +1,33 @@
 package com.hexicube.solapple.tracking;
 
 import com.hexicube.solapple.SOLAppleConfig;
+import com.hexicube.solapple.client.FoodItems;
+import net.minecraft.world.item.Item;
+
+import java.util.List;
 
 /** contains all relevant variables for current progress */
 public final class ProgressInfo {
 	/** the number of unique foods eaten */
-	public final int foodsEaten;
-	
-	ProgressInfo(FoodList foodList) {
-		foodsEaten = (int) foodList.getEatenFoods().stream()
-			.filter(food -> SOLAppleConfig.isAllowed(food.item))
-			.count();
+	public final List<Item> foodsEaten;
+	public final int foodsUneaten;
+
+	public final List<SOLAppleConfig.Server.FoodGroupConfig> completedGroups;
+	public final int groupsLeft;
+
+	private final int totalGroups;
+
+	ProgressInfo(FoodList foodList, List<SOLAppleConfig.Server.FoodGroupConfig> groups) {
+		foodsEaten = foodList.getEatenFoods().stream().map(it -> it.item).filter(SOLAppleConfig::isAllowed).toList();
+		foodsUneaten = (int) FoodItems.getAllFoods().stream().filter(food -> !foodsEaten.contains(food)).count();
+
+		completedGroups = groups.stream().filter(it -> it.isComplete(foodsEaten)).toList();
+		groupsLeft = groups.size() - completedGroups.size();
+
+		totalGroups = groups.size();
 	}
-	
+
 	public boolean hasReachedMax() {
-		return foodsEaten >= SOLAppleConfig.highestMilestone();
-	}
-	
-	/** the next milestone to reach, or a negative value if the maximum has been reached */
-	public int nextMilestone() {
-		return hasReachedMax() ? -1 : SOLAppleConfig.milestone(milestonesAchieved());
-	}
-	
-	/** the number of foods remaining until the next milestone, or a negative value if the maximum has been reached */
-	public int foodsUntilNextMilestone() {
-		return nextMilestone() - foodsEaten;
-	}
-	
-	/** the number of milestones achieved, doubling as the index of the next milestone */
-	public int milestonesAchieved() {
-		return (int) SOLAppleConfig.getMilestones().stream()
-			.filter(milestone -> foodsEaten >= milestone).count();
+		return completedGroups.size() == totalGroups;
 	}
 }

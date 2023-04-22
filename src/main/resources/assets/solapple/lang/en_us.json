@@ -4,16 +4,16 @@
 	"tooltip.solapple.disabled.blacklist": "This food is not in a food group and thus cannot improve your health.",
 	"tooltip.solapple.disabled.eaten": "Eaten: No noticeable effect",
 	
-	"command.solapple.foodlist.no_permissions": "You do not have the permissions necessary to apply this command to other players!",
+	"command.solapple.solapple.no_permissions": "You do not have the permissions necessary to apply this command to other players!",
 	
-	"command.solapple.foodlist.size.desc.foods_eaten.singular": "You've eaten one unique food!",
-	"command.solapple.foodlist.size.desc.foods_eaten.plural": "You've eaten %s unique foods!",
-	"command.solapple.foodlist.size.desc.milestone.max": "You sadly cannot gain any more health from trying new foods.",
-	"command.solapple.foodlist.size.desc.milestone.more": "You need %s more to increase your max health.",
+	"command.solapple.solapple.size.desc.foods_eaten.singular": "You've eaten one unique food!",
+	"command.solapple.solapple.size.desc.foods_eaten.plural": "You've eaten %s unique foods!",
+	"command.solapple.solapple.size.desc.milestone.max": "You sadly cannot gain any more health from trying new foods.",
+	"command.solapple.solapple.size.desc.milestone.more": "There are %s more food groups to increase your max health.",
 	
-	"command.solapple.foodlist.clear.success": "Food list reset!",
+	"command.solapple.solapple.clear.success": "Food list reset!",
 	
-	"command.solapple.foodlist.sync.success": "Food list synchronized!",
+	"command.solapple.solapple.sync.success": "Food list synchronized!",
 	
 	"message.solapple.chat_wrapper": "[SoL: Apple] %s",
 	"message.solapple.hearts.singular": "a heart",

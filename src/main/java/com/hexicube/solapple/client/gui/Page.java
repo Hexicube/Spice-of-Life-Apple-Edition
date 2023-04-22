@@ -122,7 +122,7 @@ abstract class Page extends UIElement {
 
 		UIStack fullStack = new UIStack();
 		fullStack.axis = UIStack.Axis.VERTICAL;
-		fullStack.spacing = 2;
+		fullStack.spacing = 4;
 
 		fullStack.addChild(valueStack);
 		fullStack.addChild(iconStackContainer);
@@ -161,7 +161,7 @@ abstract class Page extends UIElement {
 
 		UIStack fullStack = new UIStack();
 		fullStack.axis = UIStack.Axis.VERTICAL;
-		fullStack.spacing = 2;
+		fullStack.spacing = 4;
 
 		fullStack.addChild(valueStack);
 		fullStack.addChild(barStack);

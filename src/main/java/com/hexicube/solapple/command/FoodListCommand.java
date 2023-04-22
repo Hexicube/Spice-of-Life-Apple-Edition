@@ -54,12 +54,12 @@ public final class FoodListCommand {
 	static int showFoodListSize(CommandContext<CommandSourceStack> context, Player target) {
 		var progressInfo = FoodList.get(target).getProgressInfo();
 		
-		var progressDesc = localizedQuantityComponent("size.desc.foods_eaten", progressInfo.foodsEaten);
+		var progressDesc = localizedQuantityComponent("size.desc.foods_eaten", progressInfo.foodsEaten.size());
 		sendFeedback(context.getSource(), progressDesc);
 		
 		var milestoneDesc = progressInfo.hasReachedMax()
 			? localizedComponent("size.desc.milestone.max")
-			: localizedComponent("size.desc.milestone.more", progressInfo.foodsUntilNextMilestone());
+			: localizedComponent("size.desc.milestone.more", progressInfo.groupsLeft);
 		sendFeedback(context.getSource(), milestoneDesc);
 		
 		return Command.SINGLE_SUCCESS;

@@ -99,7 +99,7 @@ public final class FoodList implements FoodCapability {
 	
 	public ProgressInfo getProgressInfo() {
 		if (cachedProgressInfo == null) {
-			cachedProgressInfo = new ProgressInfo(this);
+			cachedProgressInfo = new ProgressInfo(this, SOLAppleConfig.getFoodGroups());
 		}
 		return cachedProgressInfo;
 	}
