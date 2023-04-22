@@ -2,7 +2,7 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
 		{ "item": "minecraft:book" },
-		{ "item": "minecraft:carrot" }
+		{ "item": "minecraft:apple" }
 	],
 	"result": {
 		"item": "solapple:food_book"
