@@ -32,10 +32,6 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 	private static final ImageData bookImage = new ImageData(texture,
 		new Rectangle(0, 0, 186, 192)
 	);
-	static final ImageData appleImage = new ImageData(texture,
-		new Rectangle(0, 240, 16, 16),
-		14, 14
-	);
 	static final ImageData heartImage = new ImageData(texture,
 		new Rectangle(0, 224, 15, 15),
 		9, 9
@@ -51,16 +47,6 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 	static final ImageData emptyDrumstickImage = new ImageData(texture,
 		new Rectangle(48, 224, 15, 15),
 		9, 9
-	);
-
-	static final ImageData emptyBarGreen = new ImageData(texture,
-			new Rectangle(71, 193, 110, 5),
-			110, 5
-	);
-
-	static final ImageData fullBarGreen = new ImageData(texture,
-		new Rectangle(71, 200, 110, 5),
-		110, 5
 	);
 
 	static final ImageData emptyBarRed = new ImageData(texture,

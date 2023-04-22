@@ -2,7 +2,6 @@ package com.hexicube.solapple.client.gui;
 
 import com.hexicube.solapple.SOLAppleConfig;
 import com.hexicube.solapple.client.FoodItems;
-import com.hexicube.solapple.client.gui.elements.UIBox;
 import com.hexicube.solapple.client.gui.elements.UILabel;
 import com.hexicube.solapple.tracking.ProgressInfo;
 
@@ -23,8 +22,7 @@ final class StatListPage extends Page {
 			foodsTasted = String.valueOf(progressInfo.foodsEaten.size());
 		}
 		
-		mainStack.addChild(statWithIcon(
-			FoodBookScreen.appleImage,
+		mainStack.addChild(basicStat(
 			foodsTasted,
 			localized("gui", "food_book.stats.foods_tasted")
 		));

@@ -10,11 +10,15 @@
 	"command.solapple.solapple.size.desc.foods_eaten.plural": "You've eaten %s unique foods!",
 	"command.solapple.solapple.size.desc.milestone.max": "You sadly cannot gain any more health from trying new foods.",
 	"command.solapple.solapple.size.desc.milestone.more": "There are %s more food groups to increase your max health.",
-	
+
 	"command.solapple.solapple.clear.success": "Food list reset!",
 	
 	"command.solapple.solapple.sync.success": "Food list synchronized!",
-	
+
+	"command.solapple.solapple.groups.progress": "Completed food groups: %1$s/%2$s",
+	"command.solapple.solapple.groups.hearts": "Total Hearts: %1$s/%2$s",
+	"command.solapple.solapple.groups.info": "%1$s: %2$s/%3$s Eaten, %4$s/%5$s Hearts",
+
 	"message.solapple.chat_wrapper": "[SoL: Apple] %s",
 	"message.solapple.hearts.singular": "a heart",
 	"message.solapple.hearts.plural": "%s hearts",

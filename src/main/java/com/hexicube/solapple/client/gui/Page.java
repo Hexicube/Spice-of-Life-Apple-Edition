@@ -63,13 +63,12 @@ abstract class Page extends UIElement {
 		return UIBox.horizontalLine(0, getWidth() / 2, 0, FoodBookScreen.leastBlack);
 	}
 	
-	UIElement statWithIcon(ImageData icon, String value, String name) {
+	UIElement basicStat(String value, String name) {
 		UIStack fullStack = new UIStack();
 		fullStack.axis = UIStack.Axis.HORIZONTAL;
 		fullStack.spacing = 0;
 
-		fullStack.addChild(new UIImage(icon));
-		fullStack.addChild(new UILabel(" " + value + " "));
+		fullStack.addChild(new UILabel(value + " "));
 		UILabel nameLabel = new UILabel(name);
 		nameLabel.color = FoodBookScreen.lessBlack;
 		fullStack.addChild(nameLabel);

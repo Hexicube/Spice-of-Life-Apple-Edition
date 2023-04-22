@@ -25,10 +25,12 @@ In order to track your progress, SoL: Apple offers a handy book called the Food 
 
 ### Commands
 
-This mod also features 3 commands:
+This mod also features 4 commands:
 
 - /solapple size  
     Tells you the number of unique foods you've eaten, as well as how many groups are unfinished.
+- /solapple groups
+	Provides a list of each food group's progress.
 - /solapple clear  
     Clears the stored list of unique foods a player has eaten and resets their heart count. This is useful for testing when editing the config or when you want to start over.
 - /solapple sync  
