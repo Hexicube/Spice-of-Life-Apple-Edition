@@ -1,6 +1,7 @@
 {
 	"tooltip.solapple.hearty.not_eaten": "Not yet eaten! What does it taste like?",
 	"tooltip.solapple.hearty.eaten": "Eaten: Assisted in adding hearts",
+	"tooltip.solapple.disabled.blacklist": "This food is not in a food group and thus cannot improve your health.",
 	"tooltip.solapple.disabled.eaten": "Eaten: No noticeable effect",
 	
 	"command.solapple.foodlist.no_permissions": "You do not have the permissions necessary to apply this command to other players!",
@@ -24,13 +25,15 @@
 	"item.solapple.food_book": "Food Book",
 	
 	"gui.solapple.food_book.stats": "Overview",
+	"gui.solapple.food_book.group": "Food Group",
 	"gui.solapple.food_book.eaten_foods": "Already Tasted: %s",
 	"gui.solapple.food_book.uneaten_foods": "Not Yet Tried: %s",
 	"gui.solapple.food_book.config": "Configuration",
 	
 	"gui.solapple.food_book.fraction": "%1$s/%2$s",
-	
+
 	"gui.solapple.food_book.stats.foods_tasted": "Foods Tasted",
+	"gui.solapple.food_book.stats.groups_finished": "Groups Finished",
 	"gui.solapple.food_book.stats.hearts_gained": "Hearts Gained",
 	"gui.solapple.food_book.stats.tooltip.progress": "%s More Until Next Milestone",
 	"gui.solapple.food_book.stats.tooltip.progress.max": "Highest Milestone Reached!",

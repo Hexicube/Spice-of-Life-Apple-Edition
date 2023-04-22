@@ -35,10 +35,6 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 		new Rectangle(0, 240, 16, 16),
 		14, 14
 	);
-	static final ImageData spiderEyeImage = new ImageData(texture,
-		new Rectangle(16, 240, 16, 16),
-		8, 8
-	);
 	static final ImageData heartImage = new ImageData(texture,
 		new Rectangle(0, 224, 15, 15),
 		9, 9
@@ -47,13 +43,43 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 		new Rectangle(16, 224, 15, 15),
 		9, 9
 	);
-	static final ImageData blacklistImage = new ImageData(texture,
+	static final ImageData emptyHeartImage = new ImageData(texture,
 		new Rectangle(32, 224, 15, 15),
-		10, 12
+		9, 9
 	);
-	static final ImageData whitelistImage = new ImageData(texture,
+	static final ImageData emptyDrumstickImage = new ImageData(texture,
 		new Rectangle(48, 224, 15, 15),
-		10, 12
+		9, 9
+	);
+
+	static final ImageData emptyBarGreen = new ImageData(texture,
+			new Rectangle(71, 193, 110, 5),
+			110, 5
+	);
+
+	static final ImageData fullBarGreen = new ImageData(texture,
+		new Rectangle(71, 200, 110, 5),
+		110, 5
+	);
+
+	static final ImageData emptyBarRed = new ImageData(texture,
+			new Rectangle(71, 207, 110, 5),
+			110, 5
+	);
+
+	static final ImageData fullBarRed = new ImageData(texture,
+		new Rectangle(71, 214, 110, 5),
+		110, 5
+	);
+
+	static final ImageData emptyBarBrown = new ImageData(texture,
+			new Rectangle(71, 221, 110, 5),
+			110, 5
+	);
+
+	static final ImageData fullBarBrown = new ImageData(texture,
+		new Rectangle(71, 228, 110, 5),
+		110, 5
 	);
 	
 	static final Color fullBlack = Color.BLACK;
@@ -95,7 +121,7 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 		elements.clear();
 		
 		// page number
-		pageNumberLabel = new UILabel("1");
+		pageNumberLabel = new UILabel("");
 		pageNumberLabel.setCenterX(background.getCenterX());
 		pageNumberLabel.setMinY(background.getMinY() + 156);
 		elements.add(pageNumberLabel);
@@ -122,21 +148,21 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 	private void initPages() {
 		pages.clear();
 		
-		pages.add(new StatListPage(foodData, background.frame));
-		
-		pages.add(new ConfigInfoPage(foodData, background.frame));
-		
-		addPages("eaten_foods", foodData.eatenFoods);
-		
-		if (SOLAppleConfig.shouldShowUneatenFoods()) {
-			addPages("uneaten_foods", foodData.uneatenFoods);
+		pages.add(new StatListPage(foodData, SOLAppleConfig.getFoodGroups(), background.frame));
+
+		for (SOLAppleConfig.Server.FoodGroupConfig group : SOLAppleConfig.getFoodGroups()) {
+			pages.add(new GroupInfoPage(foodData, group, background.frame));
+			addPages(group.name, "eaten_foods", group.filterList(foodData.eatenFoods));
+			if (SOLAppleConfig.shouldShowUneatenFoods()) addPages(group.name, "uneaten_foods", group.filterList(foodData.uneatenFoods));
 		}
+
+		pageNumberLabel.text = Page.fraction(currentPageNumber + 1, pages.size());
 	}
 	
-	private void addPages(String headerLocalizationPath, List<Item> items) {
+	private void addPages(String groupHeader, String headerLocalizationPath, List<Item> items) {
 		String header = localized("gui", "food_book." + headerLocalizationPath, items.size());
 		List<ItemStack> stacks = items.stream().map(ItemStack::new).collect(Collectors.toList());
-		pages.addAll(ItemListPage.pages(background.frame, header, stacks));
+		pages.addAll(ItemListPage.pages(background.frame, groupHeader, header, stacks));
 	}
 	
 	@Override
@@ -161,7 +187,7 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 		currentPageNumber = pageNumber;
 		updateButtonVisibility();
 		
-		pageNumberLabel.text = String.valueOf(currentPageNumber + 1);
+		pageNumberLabel.text = Page.fraction(currentPageNumber + 1, pages.size());
 	}
 	
 	@Override

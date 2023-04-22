@@ -138,6 +138,13 @@ public final class SOLAppleConfig {
 			public final String name;
 			public final List<String> foods;
 			public final int hearts;
+
+			public List<Item> filterList(List<Item> list) {
+				return list.stream().filter(food -> {
+					String id = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(food)).toString();
+					return foods.contains(id);
+				}).toList();
+			}
 		}
 
 		Server(Builder builder) {
