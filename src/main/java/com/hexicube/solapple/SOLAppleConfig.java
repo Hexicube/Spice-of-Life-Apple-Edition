@@ -111,12 +111,12 @@ public final class SOLAppleConfig {
 			}
 
 			protected static final List<String> DEFAULT_GROUPS = List.of(
-				new FoodGroupConfig("Harvestables", List.of("minecraft:apple", "minecraft:carrot", "minecraft:potato", "minecraft:beetroot"), 2).encode(),
-				new FoodGroupConfig("Fish", List.of("minecraft:cooked_cod", "minecraft:cooked_salmon", "minecraft:tropical_fish"), 2).encode(),
-				new FoodGroupConfig("Produce", List.of("minecraft:bread", "minecraft:baked_potato", "minecraft:pumpkin_pie", "minecraft:beetroot_soup", "minecraft:mushroom_stew", "minecraft:rabbit_stew"), 2).encode(),
-				new FoodGroupConfig("Meat", List.of("minecraft:cooked_beef", "minecraft:cooked_porkchop", "minecraft:cooked_chicken", "minecraft:cooked_mutton", "minecraft:cooked_rabbit"), 2).encode(),
-				new FoodGroupConfig("Treats", List.of("minecraft:cookie", "minecraft:melon_slice", "minecraft:honey_bottle", "minecraft:sweet_berries", "minecraft:glow_berries"), 2).encode(),
-				new FoodGroupConfig("Golden", List.of("minecraft:golden_apple", "minecraft:golden_carrot", "minecraft:enchanted_golden_apple"), 2).encode()
+				new FoodGroupConfig("Harvestables", List.of("minecraft:apple", "minecraft:carrot", "minecraft:potato", "minecraft:beetroot"), 1).encode(),
+				new FoodGroupConfig("Fish", List.of("minecraft:cooked_cod", "minecraft:cooked_salmon", "minecraft:tropical_fish"), 1).encode(),
+				new FoodGroupConfig("Produce", List.of("minecraft:bread", "minecraft:baked_potato", "minecraft:pumpkin_pie", "minecraft:beetroot_soup", "minecraft:mushroom_stew", "minecraft:rabbit_stew"), 1).encode(),
+				new FoodGroupConfig("Meat", List.of("minecraft:cooked_beef", "minecraft:cooked_porkchop", "minecraft:cooked_chicken", "minecraft:cooked_mutton", "minecraft:cooked_rabbit"), 1).encode(),
+				new FoodGroupConfig("Treats", List.of("minecraft:cookie", "minecraft:melon_slice", "minecraft:honey_bottle", "minecraft:sweet_berries", "minecraft:glow_berries"), 1).encode(),
+				new FoodGroupConfig("Golden", List.of("minecraft:golden_apple", "minecraft:golden_carrot", "minecraft:enchanted_golden_apple"), 5).encode()
 			);
 
 			public FoodGroupConfig(String name, List<String> foods, int hearts) {

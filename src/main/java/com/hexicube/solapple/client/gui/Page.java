@@ -9,7 +9,7 @@ import static com.hexicube.solapple.lib.Localization.localized;
 
 abstract class Page extends UIElement {
 	final UIStack mainStack;
-	final int spacing = 6;
+	final int spacing = 5;
 	
 	Page(Rectangle frame, String header) {
 		super(frame);
@@ -64,18 +64,12 @@ abstract class Page extends UIElement {
 	}
 	
 	UIElement statWithIcon(ImageData icon, String value, String name) {
-		UIStack valueStack = new UIStack();
-		valueStack.axis = UIStack.Axis.HORIZONTAL;
-		valueStack.spacing = 3;
-		
-		valueStack.addChild(new UIImage(icon));
-		valueStack.addChild(new UILabel(value));
-		
 		UIStack fullStack = new UIStack();
-		fullStack.axis = UIStack.Axis.VERTICAL;
-		fullStack.spacing = 2;
-		
-		fullStack.addChild(valueStack);
+		fullStack.axis = UIStack.Axis.HORIZONTAL;
+		fullStack.spacing = 0;
+
+		fullStack.addChild(new UIImage(icon));
+		fullStack.addChild(new UILabel(" " + value + " "));
 		UILabel nameLabel = new UILabel(name);
 		nameLabel.color = FoodBookScreen.lessBlack;
 		fullStack.addChild(nameLabel);

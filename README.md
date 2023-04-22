@@ -12,7 +12,7 @@ The mod keeps track of how many unique foods a player has eaten. As food groups 
 
 This mod comes with a custom config to set the player's starting hearts (which can be less than 10 if desired) as well as the number of and contents of food groups they need to complete by eating every food. The number of hearts per group is also configurable.
 
-The default configuration will have 10 base hearts and the following groups all offering 2 hearts:
+The default configuration will have 10 base hearts and the following groups, most offering 1 heart and golden offering 5 hearts:
 
 - **Harvestables**: Carrot, Beetroot, Apple, Potato
 - **Fish**: Cooked Cod, Cooked Salmon, Tropical Fish
@@ -28,7 +28,7 @@ In order to track your progress, SoL: Apple offers a handy book called the Food 
 This mod also features 3 commands:
 
 - /solapple size  
-    Tells you the number of unique foods you've eaten, as well as and how many more you need to eat until your next milestone.
+    Tells you the number of unique foods you've eaten, as well as how many groups are unfinished.
 - /solapple clear  
     Clears the stored list of unique foods a player has eaten and resets their heart count. This is useful for testing when editing the config or when you want to start over.
 - /solapple sync  
@@ -36,3 +36,4 @@ This mod also features 3 commands:
 
 ### Notes
 - SoL: Apple has two places to configure it. The client-side configs (like visual options) are in the regular `config` folder and aren't synced between server and client. The server-side configs (food groups and such) are stored in a serverconfig folder within each save and synced to the client. You can provide default values for these by placing a copy in the `defaultconfigs` folder, i.e. at `defaultconfigs/solapple-server.toml`.
+- Food groups are currently configured as a JSON string as I have no idea how to dynamically read server config files for food groups.

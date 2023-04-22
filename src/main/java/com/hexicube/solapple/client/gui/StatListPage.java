@@ -1,7 +1,9 @@
 package com.hexicube.solapple.client.gui;
 
 import com.hexicube.solapple.SOLAppleConfig;
+import com.hexicube.solapple.client.FoodItems;
 import com.hexicube.solapple.client.gui.elements.UIBox;
+import com.hexicube.solapple.client.gui.elements.UILabel;
 import com.hexicube.solapple.tracking.ProgressInfo;
 
 import java.awt.*;
@@ -55,9 +57,17 @@ final class StatListPage extends Page {
 			localized("gui", "food_book.stats.hearts_gained"),
 			gainedHearts, totalHearts
 		));
-		
-		mainStack.addChild(makeSeparatorLine());
-		
+
+		int allFoods = FoodItems.getAllFoodsIgnoringBlacklist().size();
+		int allowedFoods = FoodItems.getAllFoods().size();
+		int unused = allFoods - allowedFoods;
+		if (unused > 0) {
+			mainStack.addChild(makeSeparatorLine());
+			UILabel unusedLabel = new UILabel(unused + " " + localized("gui", "food_book.stats.unused", unused));
+			unusedLabel.color = FoodBookScreen.lessBlack;
+			mainStack.addChild(unusedLabel);
+		}
+
 		updateMainStack();
 	}
 }

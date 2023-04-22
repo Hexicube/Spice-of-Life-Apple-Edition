@@ -28,13 +28,14 @@
 	"gui.solapple.food_book.group": "Food Group",
 	"gui.solapple.food_book.eaten_foods": "Already Tasted: %s",
 	"gui.solapple.food_book.uneaten_foods": "Not Yet Tried: %s",
-	"gui.solapple.food_book.config": "Configuration",
+	"gui.solapple.food_book.unused_foods": "Count: %s",
 	
 	"gui.solapple.food_book.fraction": "%1$s/%2$s",
 
 	"gui.solapple.food_book.stats.foods_tasted": "Foods Tasted",
 	"gui.solapple.food_book.stats.groups_finished": "Groups Finished",
 	"gui.solapple.food_book.stats.hearts_gained": "Hearts Gained",
+	"gui.solapple.food_book.stats.unused": "Unused Foods",
 	"gui.solapple.food_book.stats.tooltip.progress": "%s More Until Next Milestone",
 	"gui.solapple.food_book.stats.tooltip.progress.max": "Highest Milestone Reached!",
 	"gui.solapple.food_book.stats.tooltip.previous_milestone": "Last Milestone: %s",
@@ -43,11 +44,13 @@
 	"gui.solapple.food_book.stats.tooltip.foods_tasted": "Foods Tasted: %s",
 	"gui.solapple.food_book.stats.tooltip.hearts_per_milestone.singular": "1 Heart per Milestone",
 	"gui.solapple.food_book.stats.tooltip.hearts_per_milestone.plural": "%s Hearts per Milestone",
-	
+
 	"gui.solapple.food_book.config.minimum_food_value": "Minimum Food Value",
 	"gui.solapple.food_book.config.tooltip.minimum_food_value": "The minimum hunger value foods need to provide in order to count towards milestones.",
 	"gui.solapple.food_book.config.hearty_fraction": "Nourishing Foods",
 	"gui.solapple.food_book.config.tooltip.hearty_fraction": "Out of %1$s foods, %2$s are nourishing enough to improve your health.",
+	"gui.solapple.food_book.config.unused": "Unused Foods",
+	"gui.solapple.food_book.config.tooltip.unused": "Out of %1$s foods, %2$s are not used in any food groups.",
 
 	"config.solapple.base_hearts": "Base Hearts",
 	"config.solapple.food_groups": "Food Groups",

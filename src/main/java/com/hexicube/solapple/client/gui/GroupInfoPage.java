@@ -39,8 +39,6 @@ final class GroupInfoPage extends Page {
 			complete ? hearts : 0, hearts
 		));
 		
-		mainStack.addChild(makeSeparatorLine());
-		
 		updateMainStack();
 	}
 }

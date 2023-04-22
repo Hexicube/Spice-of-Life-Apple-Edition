@@ -33,6 +33,10 @@ public final class FoodItems {
 	public static List<Item> getAllFoods() {
 		return new ArrayList<>(foods);
 	}
+
+	public static List<Item> getAllUnused() {
+		return foodsBeforeBlacklist.stream().filter(it -> !foods.contains(it)).toList();
+	}
 	
 	@SubscribeEvent
 	public static void setUp(FMLCommonSetupEvent event) {

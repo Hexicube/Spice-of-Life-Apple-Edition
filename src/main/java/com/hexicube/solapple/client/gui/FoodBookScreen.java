@@ -2,6 +2,7 @@ package com.hexicube.solapple.client.gui;
 
 import com.hexicube.solapple.SOLApple;
 import com.hexicube.solapple.SOLAppleConfig;
+import com.hexicube.solapple.client.FoodItems;
 import com.hexicube.solapple.tracking.FoodList;
 import com.hexicube.solapple.client.gui.elements.ImageData;
 import com.hexicube.solapple.client.gui.elements.UIElement;
@@ -155,6 +156,8 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 			addPages(group.name, "eaten_foods", group.filterList(foodData.eatenFoods));
 			if (SOLAppleConfig.shouldShowUneatenFoods()) addPages(group.name, "uneaten_foods", group.filterList(foodData.uneatenFoods));
 		}
+
+		addPages("Unused Foods", "unused_foods", FoodItems.getAllUnused());
 
 		pageNumberLabel.text = Page.fraction(currentPageNumber + 1, pages.size());
 	}

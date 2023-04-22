@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 final class ItemListPage extends Page {
-	private static final int itemsPerRow = 5;
-	private static final int rowsPerPage = 5;
+	private static final int itemsPerRow = 6;
+	private static final int rowsPerPage = 6;
 	private static final int itemsPerPage = itemsPerRow * rowsPerPage;
-	private static final int itemSpacing = UIItemStack.size + 4;
+	private static final int itemSpacing = UIItemStack.size + 2;
 	
 	static List<ItemListPage> pages(Rectangle frame, String header, String subHeader, List<ItemStack> items) {
 		List<ItemListPage> pages = new ArrayList<>();
@@ -26,7 +26,7 @@ final class ItemListPage extends Page {
 		super(frame, header, subHeader);
 		
 		int minX = (1 - itemsPerRow) * itemSpacing / 2;
-		int minY = (1 - rowsPerPage) * itemSpacing / 2 + 4;
+		int minY = (1 - rowsPerPage) * itemSpacing / 2 + 2;
 		
 		for (int i = 0; i < items.size(); i++) {
 			ItemStack itemStack = items.get(i);
