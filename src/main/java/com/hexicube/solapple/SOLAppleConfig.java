@@ -129,17 +129,17 @@ public final class SOLAppleConfig {
 				builder.push("group." + group);
 
 				name = builder
-						.translation("group_name")
+						.translation(localizationPath("group_name"))
 						.comment("The displayed name of the group.")
 						.define("name", DEFAULT_NAMES.getOrDefault(group, group));
 
 				foods = builder
-						.translation("group_food_list")
+						.translation(localizationPath("group_food_list"))
 						.comment("The list of food items for this group.")
 						.defineList("foodList", DEFAULT_FOOD.getOrDefault(group, Lists.newArrayList()), e -> e instanceof String);
 
 				hearts = builder
-						.translation("group_hearts")
+						.translation(localizationPath("group_hearts"))
 						.comment("How many hearts this group grants.")
 						.defineInRange("hearts", 2, 0, 1000);
 

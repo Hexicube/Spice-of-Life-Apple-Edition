@@ -1,10 +1,6 @@
 {
 	"tooltip.solapple.hearty.not_eaten": "Not yet eaten! What does it taste like?",
 	"tooltip.solapple.hearty.eaten": "Eaten: Assisted in adding hearts",
-	"tooltip.solapple.cheap.eaten": "Eaten: No noticeable effect",
-	"tooltip.solapple.cheap": "This food is not nourishing enough to improve your health.",
-	"tooltip.solapple.disabled.blacklist": "This food is in the blacklist and thus cannot improve your health.",
-	"tooltip.solapple.disabled.whitelist": "This food is not in the whitelist and thus cannot improve your health.",
 	"tooltip.solapple.disabled.eaten": "Eaten: No noticeable effect",
 	
 	"command.solapple.foodlist.no_permissions": "You do not have the permissions necessary to apply this command to other players!",
@@ -49,14 +45,12 @@
 	"gui.solapple.food_book.config.tooltip.minimum_food_value": "The minimum hunger value foods need to provide in order to count towards milestones.",
 	"gui.solapple.food_book.config.hearty_fraction": "Nourishing Foods",
 	"gui.solapple.food_book.config.tooltip.hearty_fraction": "Out of %1$s foods, %2$s are nourishing enough to improve your health.",
-	"gui.solapple.food_book.config.eaten_cheap_foods": "Boring Foods Tasted",
-	"gui.solapple.food_book.config.tooltip.eaten_cheap_foods": "Out of the %1$s foods that aren't nourishing enough to improve your health, you've eaten %2$s.",
-	"gui.solapple.food_book.config.blacklist": "Blacklisted Foods",
-	"gui.solapple.food_book.config.whitelist": "Whitelisted Foods",
-	"gui.solapple.food_book.config.tooltip.blacklist": "How many foods have been disabled by the blacklist.",
-	"gui.solapple.food_book.config.tooltip.whitelist": "How many foods the whitelist allows.",
-	
+
 	"config.solapple.base_hearts": "Base Hearts",
+	"config.solapple.food_groups": "Food Groups",
+	"config.solapple.group_name": "Group Displayed Name",
+	"config.solapple.group_food_list": "Group Food List",
+	"config.solapple.group_hearts": "Group Heart Reward",
 	"config.solapple.hearts_per_milestone": "Hearts per Milestone",
 	"config.solapple.milestones": "Milestones",
 	"config.solapple.is_food_tooltip_enabled": "Enable Food Tooltip",
@@ -65,8 +59,5 @@
 	"config.solapple.should_play_milestone_sounds": "Enable Milestone Sounds",
 	"config.solapple.should_spawn_intermediate_particles": "Enable Intermediate Particles",
 	"config.solapple.should_spawn_milestone_particles": "Enable Milestone Particles",
-	"config.solapple.food_blacklist": "Blacklist",
-	"config.solapple.food_whitelist": "Whitelist (disables blacklist)",
-	"config.solapple.minimum_food_value": "Minimum Food Value",
 	"config.solapple.reset_on_death": "Reset on Death"
 }
