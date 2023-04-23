@@ -15,18 +15,19 @@ final class StatListPage extends Page {
 		super(frame, localized("gui", "food_book.stats"));
 
 		ProgressInfo progressInfo = foodData.progressInfo;
-		String foodsTasted;
 		if (SOLAppleConfig.shouldShowUneatenFoods()) {
-			foodsTasted = fraction(progressInfo.foodsEaten.size(), foodData.validFoods.size());
+			mainStack.addChild(statWithBarFraction(
+				FoodBookScreen.emptyBarGreen, FoodBookScreen.fullBarGreen,
+				localized("gui", "food_book.stats.foods_tasted"),
+				progressInfo.foodsEaten.size(), foodData.validFoods.size())
+			);
 		} else {
-			foodsTasted = String.valueOf(progressInfo.foodsEaten.size());
+			mainStack.addChild(basicStat(
+				String.valueOf(progressInfo.foodsEaten.size()),
+				localized("gui", "food_book.stats.foods_tasted")
+			));
 		}
-		
-		mainStack.addChild(basicStat(
-			foodsTasted,
-			localized("gui", "food_book.stats.foods_tasted")
-		));
-		
+
 		mainStack.addChild(makeSeparatorLine());
 
 		int complete = 0;
@@ -44,7 +45,8 @@ final class StatListPage extends Page {
 			FoodBookScreen.drumstickImage, FoodBookScreen.emptyDrumstickImage,
 			FoodBookScreen.emptyBarBrown, FoodBookScreen.fullBarBrown,
 			localized("gui", "food_book.stats.groups_finished"),
-			complete, foodGroups.size()
+			complete, foodGroups.size(),
+			24, 12
 		));
 
 		mainStack.addChild(makeSeparatorLine());
@@ -53,10 +55,11 @@ final class StatListPage extends Page {
 			FoodBookScreen.heartImage, FoodBookScreen.emptyHeartImage,
 			FoodBookScreen.emptyBarRed, FoodBookScreen.fullBarRed,
 			localized("gui", "food_book.stats.hearts_gained"),
-			gainedHearts, totalHearts
+			gainedHearts, totalHearts,
+			36, 12
 		));
 
-		int allFoods = FoodItems.getAllFoodsIgnoringBlacklist().size();
+		/*int allFoods = FoodItems.getAllFoodsIgnoringBlacklist().size();
 		int allowedFoods = FoodItems.getAllFoods().size();
 		int unused = allFoods - allowedFoods;
 		if (unused > 0) {
@@ -64,7 +67,7 @@ final class StatListPage extends Page {
 			UILabel unusedLabel = new UILabel(unused + " " + localized("gui", "food_book.stats.unused", unused));
 			unusedLabel.color = FoodBookScreen.lessBlack;
 			mainStack.addChild(unusedLabel);
-		}
+		}*/
 
 		updateMainStack();
 	}

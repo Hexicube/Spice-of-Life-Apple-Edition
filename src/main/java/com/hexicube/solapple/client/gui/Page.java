@@ -105,12 +105,11 @@ abstract class Page extends UIElement {
 		return pair;
 	}
 
-	UIElement statWithFractionDynamic(ImageData icon, ImageData altIcon, ImageData barEmpty, ImageData barFull, String name, int count, int total) {
-		if (total > 20) return statWithBarFraction(barEmpty, barFull, name, count, total);
-		if (total > 16) return statWithIconFraction(icon, altIcon, name, count, total, 10);
-		if (total > 12) return statWithIconFraction(icon, altIcon, name, count, total, 8);
-		if (total > 10) return statWithIconFraction(icon, altIcon, name, count, total, 6);
-		return statWithIconFraction(icon, altIcon, name, count, total, 10);
+	UIElement statWithFractionDynamic(ImageData icon, ImageData altIcon, ImageData barEmpty, ImageData barFull, String name, int count, int total, int maxBeforeBar, int maxPerRow) {
+		if (total > maxBeforeBar) return statWithBarFraction(barEmpty, barFull, name, count, total);
+		int requiredRows = (total + maxPerRow - 1) / maxPerRow;
+		int requiredWidth = (total + requiredRows - 1) / requiredRows;
+		return statWithIconFraction(icon, altIcon, name, count, total, requiredWidth);
 	}
 
 	UIElement statWithIconFraction(ImageData icon, ImageData altIcon, String name, int count, int total, int maxPerRow) {

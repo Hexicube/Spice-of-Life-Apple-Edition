@@ -11,18 +11,18 @@ final class GroupInfoPage extends Page {
 		super(frame, groupData.name, localized("gui", "food_book.group"));
 
 		int eaten = groupData.filterList(foodData.eatenFoods).size();
-		
-		String foodsTasted;
+
 		if (SOLAppleConfig.shouldShowUneatenFoods()) {
-			foodsTasted = fraction(eaten, groupData.foods.size());
+			mainStack.addChild(statWithFractionDynamic(
+				FoodBookScreen.drumstickImage, FoodBookScreen.emptyDrumstickImage,
+				FoodBookScreen.emptyBarBrown, FoodBookScreen.fullBarBrown,
+				localized("gui", "food_book.stats.foods_tasted"),
+				eaten, groupData.foods.size(),
+				48, 12
+			));
 		} else {
-			foodsTasted = String.valueOf(eaten);
+			mainStack.addChild(basicStat(String.valueOf(eaten), localized("gui", "food_book.stats.foods_tasted")));
 		}
-		
-		mainStack.addChild(basicStat(
-			foodsTasted,
-			localized("gui", "food_book.stats.foods_tasted")
-		));
 		
 		mainStack.addChild(makeSeparatorLine());
 		
@@ -33,7 +33,8 @@ final class GroupInfoPage extends Page {
 			FoodBookScreen.heartImage, FoodBookScreen.emptyHeartImage,
 			FoodBookScreen.emptyBarRed, FoodBookScreen.fullBarRed,
 			localized("gui", "food_book.stats.hearts_gained"),
-			complete ? hearts : 0, hearts
+			complete ? hearts : 0, hearts,
+			48, 12
 		));
 		
 		updateMainStack();

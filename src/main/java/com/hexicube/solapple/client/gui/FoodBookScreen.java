@@ -49,6 +49,16 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 		9, 9
 	);
 
+	static final ImageData emptyBarGreen = new ImageData(texture,
+			new Rectangle(71, 193, 110, 5),
+			110, 5
+	);
+
+	static final ImageData fullBarGreen = new ImageData(texture,
+			new Rectangle(71, 200, 110, 5),
+			110, 5
+	);
+
 	static final ImageData emptyBarRed = new ImageData(texture,
 			new Rectangle(71, 207, 110, 5),
 			110, 5
