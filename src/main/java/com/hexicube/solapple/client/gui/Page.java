@@ -62,7 +62,7 @@ abstract class Page extends UIElement {
 	UIElement makeSeparatorLine() {
 		return UIBox.horizontalLine(0, getWidth() / 2, 0, FoodBookScreen.leastBlack);
 	}
-	
+
 	UIElement basicStat(String value, String name) {
 		UIStack fullStack = new UIStack();
 		fullStack.axis = UIStack.Axis.HORIZONTAL;
@@ -72,8 +72,37 @@ abstract class Page extends UIElement {
 		UILabel nameLabel = new UILabel(name);
 		nameLabel.color = FoodBookScreen.lessBlack;
 		fullStack.addChild(nameLabel);
-		
+
 		return fullStack;
+	}
+
+	UIElement dualStatWithIcons(String value, String secondValue, String name, ImageData icon, ImageData secondIcon) {
+		UIStack pair = new UIStack();
+		pair.axis = UIStack.Axis.VERTICAL;
+		pair.spacing = 4;
+
+		pair.addChild(new UILabel(name));
+
+		UIStack fullStack = new UIStack();
+		fullStack.axis = UIStack.Axis.HORIZONTAL;
+		fullStack.spacing = 4;
+
+		UIImage firstI = new UIImage(icon);
+		UIImage secondI = new UIImage(secondIcon);
+		UILabel firstV = new UILabel(value);
+		UILabel secondV = new UILabel(secondValue);
+
+		UIFiller filler = UIFiller.horizontal(100, fullStack.spacing, firstI, secondI, firstV, secondV);
+
+		fullStack.addChild(firstI);
+		fullStack.addChild(firstV);
+		fullStack.addChild(filler);
+		fullStack.addChild(secondV);
+		fullStack.addChild(secondI);
+
+		pair.addChild(fullStack);
+
+		return pair;
 	}
 
 	UIElement statWithFractionDynamic(ImageData icon, ImageData altIcon, ImageData barEmpty, ImageData barFull, String name, int count, int total) {

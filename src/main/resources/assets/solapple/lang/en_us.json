@@ -33,6 +33,7 @@
 	
 	"gui.solapple.food_book.stats": "Overview",
 	"gui.solapple.food_book.group": "Food Group",
+	"gui.solapple.food_book.groups": "Food Groups",
 	"gui.solapple.food_book.eaten_foods": "Already Tasted: %s",
 	"gui.solapple.food_book.uneaten_foods": "Not Yet Tried: %s",
 	"gui.solapple.food_book.unused_foods": "Count: %s",

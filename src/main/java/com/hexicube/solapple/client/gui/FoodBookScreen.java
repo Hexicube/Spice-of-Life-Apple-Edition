@@ -134,10 +134,13 @@ public final class FoodBookScreen extends Screen implements PageFlipButton.Pagea
 	
 	private void initPages() {
 		pages.clear();
+		var groups = SOLAppleConfig.getFoodGroups();
 		
-		pages.add(new StatListPage(foodData, SOLAppleConfig.getFoodGroups(), background.frame));
+		pages.add(new StatListPage(foodData, groups, background.frame));
 
-		for (SOLAppleConfig.Server.FoodGroupConfig group : SOLAppleConfig.getFoodGroups()) {
+		pages.addAll(FoodGroupListPage.pages(foodData, background.frame, groups));
+
+		for (SOLAppleConfig.Server.FoodGroupConfig group : groups) {
 			pages.add(new GroupInfoPage(foodData, group, background.frame));
 			addPages(group.name, "eaten_foods", group.filterList(foodData.eatenFoods));
 			if (SOLAppleConfig.shouldShowUneatenFoods()) addPages(group.name, "uneaten_foods", group.filterList(foodData.uneatenFoods));
