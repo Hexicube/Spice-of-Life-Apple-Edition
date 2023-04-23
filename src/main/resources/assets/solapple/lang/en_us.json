@@ -19,6 +19,9 @@
 	"command.solapple.solapple.groups.hearts": "Total Hearts: %1$s/%2$s",
 	"command.solapple.solapple.groups.info": "%1$s: %2$s/%3$s Eaten, %4$s/%5$s Hearts",
 
+	"command.solapple.solapple.verify.ok": "All food groups ok.",
+	"command.solapple.solapple.verify.fail": "%s unknown food items:",
+
 	"message.solapple.chat_wrapper": "[SoL: Apple] %s",
 	"message.solapple.hearts.singular": "a heart",
 	"message.solapple.hearts.plural": "%s hearts",

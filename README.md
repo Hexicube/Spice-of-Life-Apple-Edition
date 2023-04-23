@@ -25,7 +25,7 @@ In order to track your progress, SoL: Apple offers a handy book called the Food 
 
 ### Commands
 
-This mod also features 4 commands:
+This mod also features 5 commands:
 
 - /solapple size  
     Tells you the number of unique foods you've eaten, as well as how many groups are unfinished.
@@ -35,7 +35,10 @@ This mod also features 4 commands:
     Clears the stored list of unique foods a player has eaten and resets their heart count. This is useful for testing when editing the config or when you want to start over.
 - /solapple sync  
     Forces a sync of the food list to the client, for when something went wrong and it's mismatched.
+- /solapple validate
+	Check for any food items within groups that don't exist.
 
 ### Notes
 - SoL: Apple has two places to configure it. The client-side configs (like visual options) are in the regular `config` folder and aren't synced between server and client. The server-side configs (food groups and such) are stored in a serverconfig folder within each save and synced to the client. You can provide default values for these by placing a copy in the `defaultconfigs` folder, i.e. at `defaultconfigs/solapple-server.toml`.
+- Incorrect food items within food groups will not immediately cause issues, however they prevent that group from being completable. You can find these items with the validate command.
 - Food groups are currently configured as a JSON string as I have no idea how to dynamically read server config files for food groups.

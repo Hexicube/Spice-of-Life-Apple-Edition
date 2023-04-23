@@ -2,6 +2,7 @@ package com.hexicube.solapple.command;
 
 import com.hexicube.solapple.SOLApple;
 import com.hexicube.solapple.SOLAppleConfig;
+import com.hexicube.solapple.client.FoodItems;
 import com.hexicube.solapple.lib.Localization;
 import com.hexicube.solapple.tracking.CapabilityHandler;
 import com.hexicube.solapple.tracking.FoodList;
@@ -14,11 +15,14 @@ import net.minecraft.commands.CommandRuntimeException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static net.minecraft.commands.Commands.argument;
@@ -36,12 +40,17 @@ public final class FoodListCommand {
 				.then(withPlayerArgumentOrSender(literal("sync"), FoodListCommand::syncFoodList))
 				.then(withPlayerArgumentOrSender(literal("clear"), FoodListCommand::clearFoodList))
 				.then(withPlayerArgumentOrSender(literal("groups"), FoodListCommand::showFoodGroups))
+				.then(withSender(literal("validate"), FoodListCommand::verifyGroups))
 		);
 	}
 
 	@FunctionalInterface
 	private interface CommandWithPlayer {
 		int run(CommandContext<CommandSourceStack> context, Player target) throws CommandSyntaxException;
+	}
+
+	static ArgumentBuilder<CommandSourceStack, ?> withSender(ArgumentBuilder<CommandSourceStack, ?> base, Command command) {
+		return base.executes(command);
 	}
 
 	static ArgumentBuilder<CommandSourceStack, ?> withPlayerArgumentOrSender(ArgumentBuilder<CommandSourceStack, ?> base, CommandWithPlayer command) {
@@ -115,6 +124,36 @@ public final class FoodListCommand {
 		}
 
 		return Command.SINGLE_SUCCESS;
+	}
+
+	static int verifyGroups(CommandContext<CommandSourceStack> context) {
+		boolean isOp = context.getSource().hasPermission(2);
+		if (!isOp) throw new CommandRuntimeException(localizedComponent("no_permissions"));
+
+		var groups = SOLAppleConfig.getFoodGroups();
+		ArrayList<String> allGroupFood = new ArrayList<>();
+		for (SOLAppleConfig.Server.FoodGroupConfig group : groups) {
+			group.foods.forEach(food -> {
+				if (!allGroupFood.contains(food)) allGroupFood.add(food);
+			});
+		}
+		var foods = FoodItems.getAllFoodsIgnoringBlacklist();
+		foods.forEach(food -> {
+			String id = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(food)).toString();
+			allGroupFood.remove(id);
+		});
+
+		if (allGroupFood.size() == 0) {
+			sendFeedback(context.getSource(), localizedComponent("verify.ok"));
+			return Command.SINGLE_SUCCESS;
+		}
+
+		context.getSource().sendSuccess(localizedComponent("verify.fail", allGroupFood.size()).withStyle(ChatFormatting.RED), true);
+		for (String food : allGroupFood) {
+			context.getSource().sendSuccess(new TextComponent("  " + food).withStyle(ChatFormatting.RED), true);
+		}
+
+		return 0;
 	}
 
 	static void sendFeedback(CommandSourceStack source, MutableComponent message) {
