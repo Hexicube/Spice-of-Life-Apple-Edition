@@ -1,0 +1,5 @@
+This is a fork of Spice of Life: Carrot Edition
+https://www.curseforge.com/minecraft/mc-mods/spice-of-life-carrot-edition
+https://github.com/Cazsius/Spice-of-Life-Carrot-Edition
+
+This version has replaced the milestone system with a food group system.
